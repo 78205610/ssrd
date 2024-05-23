@@ -1,0 +1,41 @@
+plugins {
+	id 'java'
+}
+
+group = 'ssrd'
+version = "1.0.0"
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+sourceSets.main.resources {
+    srcDirs = ["src/main/resources","src/main/java"]; excludes ["**/*.java"]
+}
+jar {
+    //指定包含的文件
+    from('src/main/java') {
+        include '/**/*.xml'
+    }
+    from('src/main/java') {
+        include '/**/*.properties'
+    }
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.hibernate:hibernate-core:6.4.4.Final'
+	
+	//implementation fileTree(dir: "libs", include: ["*.jar"], exclude: ["ajframe.1.0b388.server.develop.jar"])
+	
+	implementation 'org.bouncycastle:bcpkix-jdk15on:1.69' // Bouncy Castle库的依赖项
+}
